@@ -1,0 +1,24 @@
+# 🔐 환경 변수 파일
+.env
+
+# 🔧 IDE 관련
+.idea/
+*.iml
+
+# ⚙️ Gradle build
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# 💣 로그 파일
+*.log
+
+# 🔨 OS 파일
+.DS_Store
+Thumbs.db
+
+# 📦 JAR 파일
+*.jar
+
+# 🐳 Docker 환경 변수
+*.env

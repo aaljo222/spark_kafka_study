@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spark Core + SQL
+    implementation 'org.apache.spark:spark-core_2.12:3.4.1'
+    implementation 'org.apache.spark:spark-sql_2.12:3.4.1'
+
+    // Kafka source connector
+    implementation 'org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1'
+    implementation 'org.apache.kafka:kafka-clients:3.4.0'
+
+    // MongoDB Java driver
+    implementation 'org.mongodb:mongodb-driver-sync:4.11.1'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+}
+
+application {
+    mainClass = 'com.example.SparkStructuredStreamingApp'
+    applicationDefaultJvmArgs = [
+            "-Dspark.driver.host=localhost",
+            "-Dspark.local.hostname=localhost",
+            "-Dfile.encoding=UTF-8"
+    ]
+}
+
+tasks.named('shadowJar') {
+    archiveFileName = "app.jar"
+    mergeServiceFiles()
+    zip64 = true // 반드시 필요!
+}
