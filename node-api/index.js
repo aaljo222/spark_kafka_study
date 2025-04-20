@@ -16,8 +16,8 @@ app.get("/api/sensor-avg", async (req, res) => {
     await client.connect();
 
     const data = await client
-      .db("iot")
-      .collection("avg_temperatures")
+      .db("sparkdb")
+      .collection("sparkdb")
       .find({})
       .sort({ timestamp: -1 })
       .limit(10)
