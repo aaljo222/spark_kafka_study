@@ -45,7 +45,7 @@ services:
     volumes:
       - ./spark-app:/app
     working_dir: /app
-    command: ["bash", "-c", "sleep 20 && spark-submit --master local[*] --class com.example.SparkStructuredStreamingApp app.jar"]
+    command: ["bash", "-c", "sleep 20 && /opt/bitnami/spark/bin/spark-submit --master local[*] --class com.example.StreamingCombineByKeyApp app.jar"]
 
   api:
     build: ./node-api
@@ -64,6 +64,8 @@ services:
       - api
     ports:
       - "3000:3000"
+    environment:
+      - HOST=0.0.0.0
     volumes:
       - ./react-app:/app
 

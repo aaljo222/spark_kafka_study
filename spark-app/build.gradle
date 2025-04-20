@@ -2,9 +2,10 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'org.springframework.boot' version '2.7.15'
-    id 'io.spring.dependency-management' version '1.1.0' // ✅ 꼭 필요!
 }
+
+group = 'com.example'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -21,23 +22,20 @@ dependencies {
 
     // MongoDB Java driver
     implementation 'org.mongodb:mongodb-driver-sync:4.11.1'
-    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 
-    // Spring Boot MongoDB
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    // .env 환경변수 로딩
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 
     // Lombok (선택사항)
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-
     // 테스트
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
 application {
-    mainClass = 'com.example.SparkStructuredStreamingApp'
+    mainClass = 'com.example.StreamingCombineByKeyApp' // ✅ 실제 클래스명 반영
     applicationDefaultJvmArgs = [
             "-Dspark.driver.host=localhost",
             "-Dspark.local.hostname=localhost",
@@ -48,5 +46,9 @@ application {
 tasks.named('shadowJar') {
     archiveFileName = "app.jar"
     mergeServiceFiles()
-    zip64 = true // 반드시 필요!
+    zip64 = true
+}
+
+test {
+    useJUnitPlatform()
 }
