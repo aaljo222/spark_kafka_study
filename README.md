@@ -55,6 +55,10 @@ docker exec -it kafka bash
 
 ---
 
+docker exec -it kafka bash
+kafka-console-producer --broker-list localhost:9092 --topic sensor-stream
+
+
 ## 🖼 시스템 아키텍처
 
 ### ✅ 데이터 흐름 개요
@@ -72,3 +76,24 @@ docker exec -it kafka bash
 ### ✅ MQTT 연동 구조 (선택적 확장)
 
 ![MQTT](./MQTT.jpg)
+
+
+## 🔍 Kafka 시각화 도구 (추천)
+
+- Kafka의 내부 작동 원리를 애니메이션으로 보여주는 사이트입니다.
+- 토픽, 파티션, 프로듀서, 컨슈머가 어떻게 동작하는지 이해할 수 있습니다.
+
+## 🔍 Kafka 구조 시각화 (애니메이션)
+
+Kafka의 내부 구조와 메시지 흐름을 이해하려면 아래 링크를 참고하세요.  
+SoftwareMill에서 만든 **인터랙티브 애니메이션**으로 Kafka의 동작이 시각적으로 잘 표현되어 있습니다.
+
+👉 [Kafka Visualisation (SoftwareMill)](https://softwaremill.com/kafka-visualisation/)
+
+---
+
+## 🖼️ Kafka 구성도 (정적 이미지)
+
+프로젝트의 Kafka 구성은 아래와 같습니다:
+
+![Kafka 구조도](./images/kafka_1.PNG)
