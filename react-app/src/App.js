@@ -8,6 +8,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import TempSender from "./components/TempSender";
 
 function App() {
   const [data, setData] = useState([]);
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div>
+      <TempSender />
       <h2>Sensor Temperature Chart</h2>
       <LineChart width={600} height={300} data={data}>
         <XAxis
@@ -40,9 +42,9 @@ function App() {
       <ul>
         {data.map((item, index) => (
           <li key={index}>
-            센서: {item.sensor_id}, 평균 온도:{" "}
-            {typeof item.temperature === "number"
-              ? item.temperature.toFixed(2)
+            센서: {item.sensor_id}, 평균 온도:
+            {typeof item.avg_temp === "number"
+              ? item.avg_temp.toFixed(2)
               : "N/A"}
             °C
           </li>

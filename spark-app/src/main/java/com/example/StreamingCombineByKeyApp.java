@@ -111,6 +111,7 @@ public class StreamingCombineByKeyApp {
                         collection.insertOne(doc);
 
                         if (result.getAvg_temp() > 30.0) {
+                            System.out.println("온도가 30도가 넘었어요");
                             sendSlack(slackWebhook, result.getSensor_id(), result.getAvg_temp());
                         }
                     }
