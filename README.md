@@ -77,24 +77,44 @@ kafka-console-producer --broker-list localhost:9092 --topic sensor-stream
 
 ![MQTT](./MQTT.jpg)
 
-## 🧠 Kafka 구조 이미지 모음
+## 📊 Kafka 관련 아키텍처 & 구조 이미지 모음
 
-Kafka 구조와 스트리밍 흐름을 이해하는 데 도움이 되는 시각 자료들입니다.
+### ✅ Kafka 기본 구조
 
-### 📌 Kafka 플랫폼 전체 구조
-![Kafka 플랫폼](./images/kafka_1.PNG)
+![Kafka 구조1](./images/kafka_1.PNG)  
+![Kafka 구조2](./images/kafka_2.PNG)  
+![Kafka 구조3](./images/kafka_3.PNG)  
+![Kafka 구조4](./images/kafka_4.PNG)  
+![Kafka 구조5](./images/kafka_5.PNG)  
 
-### 📌 Kafka Producer → Broker → Consumer 흐름도
-![Kafka 구조2](./images/kafka_2.PNG)
+---
 
-### 📌 Kafka 메시지 전달 방식
-![Kafka 구조3](./images/kafka_3.PNG)
+### 📌 Kafka 활용 사례 & 사용 흐름
 
-### 📌 Kafka를 통한 AI 분석 흐름
-![Kafka 구조4](./images/kafka_4.PNG)
+![Kafka Use Case](./images/kafka_use_case.jpg)  
+![Kafka Workflow](./images/kafka_workflow.gif)  
+![Kafka Workflow 2](./images/kafka_workflow2.gif)  
+![Kafka Workflow 3](./images/kafka_workflow3.gif)  
+![Kafka Workflow 4](./images/kafka_workflow4.gif)  
+![Kafka Workflow 5](./images/kafka_workflow5.gif)  
+![Kafka Workflow 6](./images/kafka_workflow6.gif)  
+![Kafka Workflow 7](./images/kafka_workflow7.gif)  
 
-### 🌀 Kafka 실시간 처리 Workflow (GIF)
-![Kafka Workflow](./images/kafka_workflow.gif)
+---
+
+### 🔁 Pub/Sub & Microservice Architecture
+
+![Pub/Sub 모델](./images/kafka_workflow6.gif)  
+![Pub/Sub 패턴](./images/kafka_workflow7.gif)  
+![Microservice 구조](./images/micro_service_architecture.gif)
+
+---
+
+### ☸️ Kafka on Kubernetes
+
+![Kafka on K8s](./images/k8s_cluster.gif)  
+![Kubernetes 구조](./images/kubernetes.jpg)
+
 
 ## 🔍 Kafka 구조 시각화 (애니메이션)
 
