@@ -20,7 +20,6 @@ app.get("/api/sensor-avg", async (req, res) => {
       .collection("sparkdb")
       .find({})
       .sort({ timestamp: -1 })
-      .limit(10)
       .toArray();
 
     res.json(data);

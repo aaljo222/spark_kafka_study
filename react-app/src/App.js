@@ -26,12 +26,28 @@ function App() {
     <div>
       <h2>Sensor Temperature Chart</h2>
       <LineChart width={600} height={300} data={data}>
-        <XAxis dataKey="timestamp" />
+        <XAxis
+          dataKey="timestamp"
+          tickFormatter={(ts) => new Date(ts).toLocaleTimeString()}
+        />
         <YAxis domain={["auto", "auto"]} />
         <Tooltip />
         <CartesianGrid stroke="#ccc" />
         <Line type="monotone" dataKey="avg_temp" stroke="#8884d8" />
       </LineChart>
+
+      <h3>📊 센서별 평균 온도</h3>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>
+            센서: {item.sensor_id}, 평균 온도:{" "}
+            {typeof item.temperature === "number"
+              ? item.temperature.toFixed(2)
+              : "N/A"}
+            °C
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

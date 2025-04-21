@@ -43,9 +43,15 @@ services:
     environment:
       SPARK_MODE: master
     volumes:
-      - ./spark-app:/app
+      - ./spark-app/app.jar:/app/app.jar
+      - ./spark-app/.env:/app/.env   # ✅ .env 마운트 추가
     working_dir: /app
-    command: ["bash", "-c", "sleep 20 && /opt/bitnami/spark/bin/spark-submit --master local[*] --class com.example.StreamingCombineByKeyApp app.jar"]
+    command:
+      [
+        "bash",
+        "-c",
+        "sleep 10 && /opt/bitnami/spark/bin/spark-submit --master local[*] --class com.example.StreamingCombineByKeyApp /app/app.jar",
+      ]
 
   api:
     build: ./node-api

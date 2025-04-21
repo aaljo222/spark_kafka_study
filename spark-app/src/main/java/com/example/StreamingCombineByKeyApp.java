@@ -33,7 +33,7 @@ import static org.apache.spark.sql.functions.*;
 
 public class StreamingCombineByKeyApp {
     public static void main(String[] args) throws StreamingQueryException, TimeoutException {
-        System.setProperty("hadoop.home.dir", "C:\\winutils\\hadoop-3.2.2");
+//        System.setProperty("hadoop.home.dir", "C:\\winutils\\hadoop-3.2.2");
         Dotenv dotenv = Dotenv.load();
         String mongoUri = dotenv.get("MONGO_URI");
         String slackWebhook = dotenv.get("SLACK_WEBHOOK");
@@ -97,8 +97,8 @@ public class StreamingCombineByKeyApp {
                     @Override
                     public boolean open(long partitionId, long version) {
                         mongoClient = MongoClients.create(mongoUri);
-                        MongoDatabase db = mongoClient.getDatabase("iot");
-                        collection = db.getCollection("avg_temperatures");
+                        MongoDatabase db = mongoClient.getDatabase("sparkdb");
+                        collection = db.getCollection("sparkdb");
                         return true;
                     }
 
