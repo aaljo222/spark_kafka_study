@@ -85,10 +85,13 @@ kafka-console-producer --broker-list localhost:9092 --topic sensor-stream
 
 ## 🔍 Kafka 구조 시각화 (애니메이션)
 
-Kafka의 내부 구조와 메시지 흐름을 이해하려면 아래 링크를 참고하세요.  
-SoftwareMill에서 만든 **인터랙티브 애니메이션**으로 Kafka의 동작이 시각적으로 잘 표현되어 있습니다.
+Kafka의 내부 구조와 메시지 흐름을 이해하려면 아래 링크들을 참고하세요.
 
-👉 [Kafka Visualisation (SoftwareMill)](https://softwaremill.com/kafka-visualisation/)
+1. 👉 [Kafka Visualisation (SoftwareMill)](https://softwaremill.com/kafka-visualisation/)  
+   Kafka의 핵심 개념을 애니메이션으로 보여주는 인터랙티브한 사이트입니다.
+
+2. 👉 [Apache Kafka: An Animated Introduction (Medium by Mark Haynes)](https://medium.com/@mark-haynes/apache-kafka-an-animated-introduction-a553ca57a8a1)  
+   Kafka 토픽, 파티션, 컨슈머 그룹 등의 개념을 시각적으로 설명하는 블로그입니다.
 
 ---
 
