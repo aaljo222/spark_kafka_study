@@ -77,11 +77,24 @@ kafka-console-producer --broker-list localhost:9092 --topic sensor-stream
 
 ![MQTT](./MQTT.jpg)
 
+## 🧠 Kafka 구조 이미지 모음
 
-## 🔍 Kafka 시각화 도구 (추천)
+Kafka 구조와 스트리밍 흐름을 이해하는 데 도움이 되는 시각 자료들입니다.
 
-- Kafka의 내부 작동 원리를 애니메이션으로 보여주는 사이트입니다.
-- 토픽, 파티션, 프로듀서, 컨슈머가 어떻게 동작하는지 이해할 수 있습니다.
+### 📌 Kafka 플랫폼 전체 구조
+![Kafka 플랫폼](./images/kafka_1.PNG)
+
+### 📌 Kafka Producer → Broker → Consumer 흐름도
+![Kafka 구조2](./images/kafka_2.PNG)
+
+### 📌 Kafka 메시지 전달 방식
+![Kafka 구조3](./images/kafka_3.PNG)
+
+### 📌 Kafka를 통한 AI 분석 흐름
+![Kafka 구조4](./images/kafka_4.PNG)
+
+### 🌀 Kafka 실시간 처리 Workflow (GIF)
+![Kafka Workflow](./images/kafka_workflow.gif)
 
 ## 🔍 Kafka 구조 시각화 (애니메이션)
 
