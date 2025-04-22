@@ -44,7 +44,7 @@ public class StreamingCombineByKeyApp {
                 .getOrCreate();
 
         spark.sparkContext().setLogLevel("WARN");
-
+        String kafkaBroker = dotenv.get("KAFKA_BROKER", "localhost:9092");
         StructType schema = new StructType()
                 .add("sensor_id", DataTypes.StringType)
                 .add("temperature", DataTypes.DoubleType)
@@ -52,7 +52,7 @@ public class StreamingCombineByKeyApp {
 
         Dataset<Row> kafkaStream = spark.readStream()
                 .format("kafka")
-                .option("kafka.bootstrap.servers", "kafka:9092")
+                .option("kafka.bootstrap.servers", kafkaBroker)  // ← 여기 분기 처리
                 .option("subscribe", "sensor-stream")
                 .option("startingOffsets", "latest")
                 .load();

@@ -35,7 +35,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.example.StreamingCombineByKeyApp' // ✅ 실제 클래스명 반영
+    mainClass = 'com.example.AppLauncher' // ✅ 실제 클래스명 반영
     applicationDefaultJvmArgs = [
             "-Dspark.driver.host=localhost",
             "-Dspark.local.hostname=localhost",
@@ -47,8 +47,16 @@ tasks.named('shadowJar') {
     archiveFileName = "app.jar"
     mergeServiceFiles()
     zip64 = true
+
+    // ✅ .env 파일을 JAR 내부에 포함
+    from('.') {
+        include '.env'
+        into('')
+    }
 }
+
 
 test {
     useJUnitPlatform()
 }
+

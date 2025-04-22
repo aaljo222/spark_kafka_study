@@ -3,9 +3,9 @@ import React from "react";
 const TempSender = () => {
   console.log("센서 데이터 전송");
   const sensors = [
-    { sensor_id: "sensor-101", temperature: 31.5 },
-    { sensor_id: "sensor-102", temperature: 28.4 },
-    { sensor_id: "sensor-103", temperature: 36.7 },
+    { sensor_id: "sensor11-1101", temperature: 231.5 },
+    { sensor_id: "sensor11-1102", temperature: 28.4 },
+    { sensor_id: "sensor11-1103", temperature: 236.7 },
   ];
 
   sensors.forEach((sensor) => {

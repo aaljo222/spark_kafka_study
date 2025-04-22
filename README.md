@@ -133,3 +133,11 @@ Kafka의 내부 구조와 메시지 흐름을 이해하려면 아래 링크들�
 프로젝트의 Kafka 구성은 아래와 같습니다:
 
 ![Kafka 구조도](./images/kafka_1.PNG)
+
+##producer 
+docker exec -it kafka kafka-console-producer --broker-list localhost:9092 --topic sensor-stream
+
+{"sensor_id":"sensor_1","temperature":24.5,"timestamp":1713763500}
+
+##consumer
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic sensor-stream --from-beginning

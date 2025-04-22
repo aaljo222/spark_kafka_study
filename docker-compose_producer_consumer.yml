@@ -20,7 +20,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
@@ -44,13 +44,52 @@ services:
       SPARK_MODE: master
     volumes:
       - ./spark-app/app.jar:/app/app.jar
-      - ./spark-app/.env:/app/.env # ✅ .env 마운트
+      - ./spark-app/.env:/app/.env
     working_dir: /app
-    command:
-      [
+    command: [
         "bash",
         "-c",
-        "sleep 10 && /opt/bitnami/spark/bin/spark-submit --master local[*] --class com.example.AppLauncher --conf spark.driver.extraJavaOptions='--add-exports java.base/sun.nio.ch=ALL-UNNAMED' /app/app.jar spark",
+        "sleep 10 && /opt/bitnami/spark/bin/spark-submit \
+        --master local[*] \
+        --class com.example.AppLauncher \
+        --conf spark.driver.extraJavaOptions=--add-exports=java.base/sun.nio.ch=ALL-UNNAMED \
+        /app/app.jar spark"
+      ]
+
+  producer:
+    image: bitnami/spark:3.4.1-debian-11-r0
+    container_name: producer
+    depends_on:
+      - kafka
+    volumes:
+      - ./spark-app/app.jar:/app/app.jar
+      - ./spark-app/.env:/app/.env
+    working_dir: /app
+    command: [
+        "bash", "-c",
+        "/opt/bitnami/spark/bin/spark-submit \
+        --master local[*] \
+        --class com.example.AppLauncher \
+        --conf spark.driver.extraJavaOptions=--add-exports=java.base/sun.nio.ch=ALL-UNNAMED \
+        /app/app.jar producer"
+      ]
+
+  consumer:
+    image: bitnami/spark:3.4.1-debian-11-r0
+    container_name: consumer
+    depends_on:
+      - kafka
+    volumes:
+      - ./spark-app/app.jar:/app/app.jar
+      - ./spark-app/.env:/app/.env
+    working_dir: /app
+    command: [
+        "bash", "-c",
+        "/opt/bitnami/spark/bin/spark-submit \
+        --master local[*] \
+        --class com.example.AppLauncher \
+        --conf spark.driver.extraJavaOptions=--add-exports=java.base/sun.nio.ch=ALL-UNNAMED \
+        /app/app.jar consumer"
       ]
 
   api:

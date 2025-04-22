@@ -1,13 +1,26 @@
-# run_all.ps1
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-# Step 1: docker-compose up -d (백그라운드 실행)
-Write-Host "🚀 Docker Compose 서비스 시작..."
-docker-compose up -d
+$topic = "sensor-stream"
+$container = "kafka"
 
-# Step 2: Kafka 준비 대기 (Zookeeper/Kafka가 완전히 뜨는 데 몇 초 걸림)
-Start-Sleep -Seconds 10
+Write-Host "📌 Kafka 컨테이너에서 '$topic' 토픽을 생성합니다..."
 
-# Step 3: Kafka 토픽 생성
-Write-Host "📌 Kafka 토픽 생성 스크립트 실행..."
-.\create_kafka_topic.ps1
+docker-compose exec $container kafka-topics --create `
+  --topic $topic `
+  --bootstrap-server localhost:9092 `
+  --partitions 2 `
+  --replication-factor 1 `
+  --if-not-exists
+
+if ($LASTEXITCODE -ne 0) {
+  Write-Error "❌ Kafka 토픽 생성 실패. 컨테이너 상태를 확인하세요."
+  exit 1
+}
+
+Write-Host ""
+Write-Host "=============================="
+Write-Host "📋 Kafka 토픽 목록:"
+Write-Host "=============================="
+Write-Host ""
+
+docker-compose exec $container kafka-topics --list --bootstrap-server localhost:9092
