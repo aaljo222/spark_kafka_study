@@ -141,3 +141,42 @@ docker exec -it kafka kafka-console-producer --broker-list localhost:9092 --topi
 
 ## consumer
 docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic sensor-stream --from-beginning
+
+## 🔄 Kafka 구조 설명
+
+Kafka는 **고성능 분산 메시징 시스템**으로, 아래와 같은 구조로 구성됩니다.
+
+![Kafka 구조](./images/kafka-architecture-diagram.PNG)
+
+---
+
+### 📤 Producer Clients (생산자 클라이언트)
+
+Kafka에 데이터를 전송하는 시스템입니다. 예시로는:
+
+- **Databases**: 변경 이벤트나 트리거 데이터를 전송
+- **IoT events**: 센서 데이터 등 실시간 스트리밍
+- **Web events**: 사용자 클릭, 페이지 뷰 등 이벤트
+- **Logs**: 서버나 애플리케이션 로그 수집
+
+이들은 Kafka의 **topic**에 데이터를 보냅니다.
+
+---
+
+### 📦 Kafka Core (메시지 브로커)
+
+Kafka의 핵심 처리 영역입니다.
+
+- **OS page cache (memory)**: 먼저 메모리에 기록된 후
+- **Flushed to disk**: 디스크로 저장됩니다 (성능 + 내구성)
+- **Topic**: 데이터 저장 단위 (토픽은 여러 **Partition**으로 구성됨)
+- **Partition 구조**:
+  - 각 파티션은 Append-only 로그
+  - 각 메시지는 고유한 **offset**으로 식별됨
+  - 메시지는 오래 보관되며, 언제든 재처리 가능
+
+```text
+Topic: sensor-stream
+Partition 0:  [0] [1] [2] [3] [4] → 계속 추가됨
+
+![Kafka 구조](./images/kafka-architecture-diagram2.PNG)
