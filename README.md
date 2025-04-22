@@ -147,6 +147,7 @@ docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 -
 Kafka는 **고성능 분산 메시징 시스템**으로, 아래와 같은 구조로 구성됩니다.
 
 ![Kafka 구조](./images/kafka-architecture-diagram.PNG)
+![Kafka 구조](./images/kafka-architecture-diagram2.PNG)
 
 ---
 
@@ -179,4 +180,4 @@ Kafka의 핵심 처리 영역입니다.
 Topic: sensor-stream
 Partition 0:  [0] [1] [2] [3] [4] → 계속 추가됨
 
-![Kafka 구조](./images/kafka-architecture-diagram2.PNG)
+
