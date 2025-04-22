@@ -13,16 +13,14 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.3.0
     container_name: kafka
-    depends_on:
-      - zookeeper
     ports:
       - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
@@ -35,45 +33,33 @@ services:
       - mongo_data:/data/db
 
   spark:
-    image: bitnami/spark:3.4.1-debian-11-r0
+    image: bitnami/spark:3.4.1
     container_name: spark
     depends_on:
       - kafka
       - mongodb
-    environment:
-      SPARK_MODE: master
     volumes:
-      - ./spark-app/app.jar:/app/app.jar
-      - ./spark-app/.env:/app/.env # ✅ .env 마운트
+      - ./spark-app/app.py:/app/app.py
+      - ./spark-app/.env:/app/.env
     working_dir: /app
-    command:
-      [
-        "bash",
-        "-c",
-        "sleep 10 && /opt/bitnami/spark/bin/spark-submit --master local[*] --class com.example.AppLauncher --conf spark.driver.extraJavaOptions='--add-exports java.base/sun.nio.ch=ALL-UNNAMED' /app/app.jar spark",
-      ]
+    command: >
+      bash -c "
+        sleep 10 &&
+        spark-submit --packages
+        org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,
+        org.mongodb.spark:mongo-spark-connector_2.12:10.2.0
+        app.py
+      "
 
-  api:
-    build: ./node-api
-    container_name: api
-    depends_on:
-      - mongodb
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
     ports:
-      - "4000:4000"
-    env_file:
-      - ./node-api/.env
-
-  react:
-    build: ./react-app
-    container_name: react
-    depends_on:
-      - api
-    ports:
-      - "3000:3000"
+      - "9000:9000"
     environment:
-      - HOST=0.0.0.0
-    volumes:
-      - ./react-app:/app
+      KAFKA_BROKERCONNECT: kafka:29092
+    depends_on:
+      - kafka
 
 volumes:
   mongo_data:
