@@ -12,7 +12,7 @@ public class ProducerMain {
                 .filename(".env")
                 .load();  // ← 명시적 로드
 
-        String kafkaBroker = dotenv.get("KAFKA_BROKER", "localhost:9092");
+        String kafkaBroker = dotenv.get("KAFKA_BROKER", "kafka:9092");
         System.out.println("✅ kafkaBroker = " + kafkaBroker);
         Properties props = new Properties();
         props.put("bootstrap.servers", kafkaBroker);  // ← 여기도 적용

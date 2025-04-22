@@ -14,5 +14,6 @@ public class AppLauncher {
         } else {
             ProducerMain.main(new String[]{}); // 기본값: producer
         }
+
     }
 }

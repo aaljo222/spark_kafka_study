@@ -21,7 +21,7 @@ public class JsonConsumer {
 
 
         System.out.println("--------------------------------------------");
-        String kafkaBroker = dotenv.get("KAFKA_BROKER", "localhost:9092");
+        String kafkaBroker = dotenv.get("KAFKA_BROKER", "kafka:9092");
 
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBroker);  // ← 적용

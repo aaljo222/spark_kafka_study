@@ -37,14 +37,13 @@ public class StreamingCombineByKeyApp {
         Dotenv dotenv = Dotenv.load();
         String mongoUri = dotenv.get("MONGO_URI");
         String slackWebhook = dotenv.get("SLACK_WEBHOOK");
-
         SparkSession spark = SparkSession.builder()
                 .appName("KafkaStructuredStreamingCombineByKey")
                 .master("local[*]")
                 .getOrCreate();
 
         spark.sparkContext().setLogLevel("WARN");
-        String kafkaBroker = dotenv.get("KAFKA_BROKER", "localhost:9092");
+        String kafkaBroker = dotenv.get("KAFKA_BROKER", "kafka:9092");
         StructType schema = new StructType()
                 .add("sensor_id", DataTypes.StringType)
                 .add("temperature", DataTypes.DoubleType)
