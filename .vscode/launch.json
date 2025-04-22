@@ -1,0 +1,6 @@
+{
+  "name": "Run Spark Job",
+  "type": "powershell",
+  "request": "launch",
+  "script": "${workspaceFolder}/scripts/run-spark-job.ps1"
+}
