@@ -180,4 +180,83 @@ Kafka의 핵심 처리 영역입니다.
 Topic: sensor-stream
 Partition 0:  [0] [1] [2] [3] [4] → 계속 추가됨
 
+# Apache Kafka 실행 스크립트 및 설정 파일 설명
+
+이 디렉토리는 Apache Kafka를 운영하거나 테스트하는 데 사용되는 다양한 실행 스크립트와 프로퍼티 설정 파일들을 포함하고 있습니다.
+
+---
+
+## 🧩 주요 실행 스크립트 (`*.sh`)
+
+| 파일명 | 설명 |
+|--------|------|
+| kafka-server-start.sh | Kafka 브로커를 시작하는 스크립트 |
+| kafka-server-stop.sh | Kafka 브로커를 종료하는 스크립트 |
+| zookeeper-server-start.sh | Zookeeper 서버 시작 |
+| zookeeper-server-stop.sh | Zookeeper 서버 종료 |
+| kafka-topics.sh | 토픽 생성, 삭제, 조회 등 관리 |
+| kafka-console-producer.sh | 콘솔에서 메시지를 Kafka에 전송 |
+| kafka-console-consumer.sh | 콘솔에서 Kafka 메시지를 소비 |
+| kafka-consumer-groups.sh | 소비자 그룹 조회 및 오프셋 관리 |
+| kafka-configs.sh | 토픽, 사용자, 브로커 설정 변경 |
+| kafka-acls.sh | ACL(접근 제어 목록) 관리 |
+| kafka-streams-application-reset.sh | Kafka Streams 애플리케이션 초기화 |
+| kafka-delete-records.sh | 특정 파티션의 레코드 삭제 |
+| kafka-log-dirs.sh | 브로커의 로그 디렉토리 조회 |
+| kafka-dump-log.sh | 로그 세그먼트 파일을 덤프 |
+| kafka-reassign-partitions.sh | 파티션 재할당 수행 |
+| kafka-preferred-replica-election.sh | 선호 리더 복구 프로세스 수행 |
+| kafka-replica-verification.sh | 복제 상태 검증 |
+| kafka-mirror-maker.sh | Kafka 간 데이터 복제 도구 |
+| kafka-producer-perf-test.sh | Kafka 생산자 성능 테스트 |
+| kafka-consumer-perf-test.sh | Kafka 소비자 성능 테스트 |
+| kafka-broker-api-versions.sh | 브로커가 지원하는 API 버전 확인 |
+| kafka-run-class.sh | Kafka 관련 클래스 실행용 도구 |
+| trogdor.sh | Kafka 스트레스 테스트 도구 실행 |
+
+---
+
+## 🔌 Kafka Connect 관련 스크립트
+
+| 파일명 | 설명 |
+|--------|------|
+| connect-standalone.sh | 단일 프로세스로 Connect 실행 |
+| connect-distributed.sh | 분산형 Connect 클러스터 실행 |
+| connect-console-source.properties | 콘솔 입력을 소스 데이터로 사용하는 설정 |
+| connect-console-sink.properties | 콘솔 출력으로 데이터를 보내는 설정 |
+| connect-file-source.properties | 파일을 읽어 Kafka로 보내는 소스 커넥터 설정 |
+| connect-file-sink.properties | Kafka 메시지를 파일로 저장하는 싱크 커넥터 설정 |
+
+---
+
+## ⚙️ 설정 파일들 (`*.properties`)
+
+| 파일명 | 설명 |
+|--------|------|
+| server.properties | Kafka 브로커 설정 (포트, 로그 경로 등) |
+| zookeeper.properties | Zookeeper 설정 파일 |
+| producer.properties | Kafka 프로듀서 설정 |
+| consumer.properties | Kafka 컨슈머 설정 |
+| log4j.properties | Kafka 로그 설정 파일 |
+| connect-log4j.properties | Connect 로그 설정 |
+| tools-log4j.properties | Kafka 유틸리티 로그 설정 |
+| connect-standalone.properties | Connect Standalone 모드 기본 설정 |
+| connect-distributed.properties | Connect Distributed 모드 기본 설정 |
+| trogdor.conf | Trogdor 성능 테스트 도구 설정 |
+
+---
+
+## 🗂 기타
+
+| 디렉토리 | 설명 |
+|----------|------|
+| windows | Windows 환경용 실행 스크립트 보관 디렉토리 |
+
+---
+
+## ✅ 참고
+
+- 대부분의 `*.sh` 스크립트는 `$KAFKA_HOME/bin` 경로에서 실행
+- Kafka 실행 전 Zookeeper부터 먼저 실행 필요
+
 
