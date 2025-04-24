@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
@@ -23,6 +21,8 @@ services:
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
 
   mongodb:
     image: mongo
@@ -31,25 +31,6 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-
-  spark:
-    image: bitnami/spark:3.4.1
-    container_name: spark
-    depends_on:
-      - kafka
-      - mongodb
-    volumes:
-      - ./spark-app/app.py:/app/app.py
-      - ./spark-app/.env:/app/.env
-    working_dir: /app
-    command: >
-      bash -c "
-        sleep 10 &&
-        spark-submit --packages
-        org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,
-        org.mongodb.spark:mongo-spark-connector_2.12:10.2.0
-        app.py
-      "
 
   kafdrop:
     image: obsidiandynamics/kafdrop
@@ -60,6 +41,19 @@ services:
       KAFKA_BROKERCONNECT: kafka:29092
     depends_on:
       - kafka
+
+  widget-service:
+    build:
+      context: ./spark-consumer
+    container_name: widget-service
+    env_file:
+      - .env
+    depends_on:
+      - kafka
+      - mongodb
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
 
 volumes:
   mongo_data:

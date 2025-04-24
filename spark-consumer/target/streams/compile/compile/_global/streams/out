@@ -1,0 +1,5 @@
+[0m[[0m[33mwarn[0m] [0m[0mE:\leejaeoh\kafka_spark\spark_kafka_study\spark-consumer\src\main\scala\model\JsonProtocol.scala:4:14: imported `Order` is permanently hidden by definition of object Order in package model[0m
+[0m[[0m[33mwarn[0m] [0m[0mimport model.Order[0m
+[0m[[0m[33mwarn[0m] [0m[0m             ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo deprecations (since 2.6.0); re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m

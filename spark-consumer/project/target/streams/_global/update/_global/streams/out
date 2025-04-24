@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0mnot up to date. inChanged = true, force = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mUpdating ProjectRef(uri("file:/E:/leejaeoh/kafka_spark/spark_kafka_study/spark-consumer/project/"), "spark-consumer-build")...[0m
+[0m[[0m[0minfo[0m] [0m[0mUpdating spark-consumer-build[0m
+[0m[[0m[0minfo[0m] [0m[0mResolved spark-consumer-build dependencies[0m
+[0m[[0m[0minfo[0m] [0m[0mFetching artifacts of spark-consumer-build[0m
+[0m[[0m[0minfo[0m] [0m[0mFetched artifacts of spark-consumer-build[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone updating ProjectRef(uri("file:/E:/leejaeoh/kafka_spark/spark_kafka_study/spark-consumer/project/"), "spark-consumer-build")[0m
