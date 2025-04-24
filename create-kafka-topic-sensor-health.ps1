@@ -1,6 +1,6 @@
 ﻿[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-$topic = "event-topic"
+$topic = "sensor-health"
 $container = "kafka"
 $broker = "localhost:9092"
 

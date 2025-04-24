@@ -112,3 +112,14 @@ $env:PATH += ";$env:HADOOP_HOME\bin"
 mongodb://host.docker.internal:27017
   
 
+docker exec -it kafka /usr/bin/kafka-console-consumer `
+  --bootstrap-server kafka:29092 `
+  --topic sensor-health `
+  --from-beginning
+
+## 🔄 이벤트 기반 아키텍처 (Event-driven Architecture)
+
+![event-driven](./images/event_driven.png)
+
+
+
